@@ -41,7 +41,7 @@ export const Footer = () => {
             {/* Socials */}
             <div className="flex items-center gap-5 pt-2">
               <Link
-                href="https://twitter.com/renuir"
+                href="https://x.com/renuirug?s=11"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 hover:text-white transition-colors"
@@ -57,7 +57,7 @@ export const Footer = () => {
                 <Linkedin className="h-5 w-5" />
               </Link>
               <Link
-                href="https://instagram.com/renuir"
+                href="https://www.instagram.com/renuir_app?igsh=MW55Z3lnaDh5bTVwdw%3D%3D&utm_source=qr"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 hover:text-white transition-colors"
