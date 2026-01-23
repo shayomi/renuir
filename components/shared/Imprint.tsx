@@ -54,11 +54,11 @@ export default function ImprintPage() {
             Register Entry
           </h3>
           <p className="text-gray-700 leading-relaxed">
-            Registered in the Commercial Register (Handelsregister)
+            Amtsgericht Charlottenburg (zu HRB 283063 B)
             <br />
-            Register Court: Amtsgericht Berlin-Charlottenburg
+            Handelsregister: Hardenbergstr. 31, 10623 Berlin
             <br />
-            Registration Number: HRB [pending]
+            Vereinsregister: Amtsgerichtsplatz 1, 14057 Berlin
           </p>
         </section>
 
@@ -67,7 +67,7 @@ export default function ImprintPage() {
           <p className="text-gray-700 leading-relaxed">
             VAT identification number according to § 27a Umsatzsteuergesetz:
             <br />
-            [pending registration]
+            [Registration in progress]
           </p>
         </section>
 
