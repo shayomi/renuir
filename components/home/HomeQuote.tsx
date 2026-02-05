@@ -20,7 +20,7 @@ const HomeQuote = () => {
             variants={fadeIn("right", "tween", 0, 0.6)}
             className="order-2 lg:order-1"
           >
-            <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden">
+            <div className="relative w-full aspect-4/3 rounded-2xl overflow-hidden">
               <Image
                 src="/images/Building.png"
                 alt="Why we're building Renuir"
@@ -39,17 +39,25 @@ const HomeQuote = () => {
             variants={fadeIn("left", "tween", 0.2, 0.6)}
             className="order-1 lg:order-2 space-y-6"
           >
-            <Typography variant="h2" className="font-bold text-gray-900 text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight">
+            <Typography
+              variant="h2"
+              className="font-bold text-gray-900 text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight"
+            >
               Why we&apos;re building this
             </Typography>
 
             <div className="space-y-5">
               <p className="text-gray-500 leading-relaxed text-base md:text-lg">
-                We&apos;ve all been there. That sinking feeling when you realize your bag is gone. Then comes the worst part: calling every place you visited, repeating the same description, hoping someone picked it up.
+                We&apos;ve all been there. That sinking feeling when you realize
+                your bag is gone. Then comes the worst part: calling every place
+                you visited, repeating the same description, hoping someone
+                picked it up.
               </p>
 
               <p className="font-semibold text-gray-900 leading-relaxed text-base md:text-lg">
-                We&apos;re building Renuir because that process is broken. One report should be enough. We want to make it easy to get your stuff back, and easy for good people to return what they find.
+                We&apos;re building Renuir because that process is broken. One
+                report should be enough. We want to make it easy to get your
+                stuff back, and easy for good people to return what they find.
               </p>
             </div>
           </motion.div>

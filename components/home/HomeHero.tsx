@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Form,
   FormControl,
@@ -14,14 +15,17 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../ui/input";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { fadeIn } from "../Variants";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   email: z.string().email("Please enter a valid email"),
 });
 
 const HomeHero = () => {
+  const [loading, setLoading] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -29,10 +33,34 @@ const HomeHero = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    const subject = encodeURIComponent("Waitlist Request - Early Access");
-    const body = encodeURIComponent(`Hi Renuir team,\n\nI'd like to join the waitlist for early access.\n\nMy email: ${values.email}\n\nThank you!`);
-    window.location.href = `mailto:info@renuir.com?subject=${subject}&body=${body}`;
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: values.email }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Submission failed");
+      }
+
+      toast.success("You're on the waitlist 🎉", {
+        description: "We’ll notify you when early access is ready.",
+      });
+
+      form.reset();
+    } catch (error) {
+      toast.error("Something went wrong", {
+        description: "Please try again later.",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const containerRef = useRef(null);
@@ -42,14 +70,12 @@ const HomeHero = () => {
     <section className="bg-white pt-20 md:pt-24 pb-10 md:pb-16 overflow-hidden">
       <div ref={containerRef} className="app-container">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
-          {/* Left Content */}
           <motion.div
             initial="hidden"
             animate={isInView ? "show" : "hidden"}
             variants={fadeIn("up", "tween", 0.1, 0.6)}
             className="flex-1 lg:flex-[0.55] space-y-8"
           >
-            {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
@@ -62,7 +88,6 @@ const HomeHero = () => {
               </span>
             </motion.div>
 
-            {/* Headline */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -78,7 +103,6 @@ const HomeHero = () => {
               </Typography>
             </motion.div>
 
-            {/* Description */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -88,8 +112,8 @@ const HomeHero = () => {
                 variant="p"
                 className="text-lg md:text-xl text-gray-500 leading-relaxed max-w-lg"
               >
-                The modern lost & found platform that actually works. Report once, and
-                we&apos;ll search everywhere for you in real time.
+                The modern lost & found platform that actually works. Report
+                once, and we&apos;ll search everywhere for you in real time.
               </Typography>
             </motion.div>
 
@@ -114,6 +138,7 @@ const HomeHero = () => {
                             <Mail className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400 group-focus-within:text-primary-500 transition-colors" />
                             <Input
                               {...field}
+                              disabled={loading}
                               placeholder="Enter your email"
                               className="pl-12 h-14 text-base rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/10 bg-white shadow-sm transition-all placeholder:text-gray-400"
                             />
@@ -127,16 +152,16 @@ const HomeHero = () => {
                   <Button
                     type="submit"
                     size="lg"
-                    className="h-14 px-8 text-base font-bold rounded-xl bg-primary-600 hover:bg-primary-700 text-white shadow-lg shadow-primary-600/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
+                    disabled={loading}
+                    className="h-14 px-8 text-base font-bold rounded-xl bg-primary-600 hover:bg-primary-700 text-white shadow-lg shadow-primary-600/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-60"
                   >
-                    Get Early Access
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    {loading ? "Joining..." : "Get Early Access"}
+                    {!loading && <ArrowRight className="ml-2 h-5 w-5" />}
                   </Button>
                 </form>
               </Form>
             </motion.div>
 
-            {/* Features */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -160,13 +185,15 @@ const HomeHero = () => {
                 </span>
               </div>
             </motion.div>
-
           </motion.div>
 
-          {/* Right Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, x: 20 }}
-            animate={isInView ? { opacity: 1, scale: 1, x: 0 } : { opacity: 0, scale: 0.95, x: 20 }}
+            animate={
+              isInView
+                ? { opacity: 1, scale: 1, x: 0 }
+                : { opacity: 0, scale: 0.95, x: 20 }
+            }
             transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
             className="flex-1 lg:flex-[0.45] w-full flex items-center justify-center"
           >
