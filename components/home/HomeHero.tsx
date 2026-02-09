@@ -112,7 +112,7 @@ const HomeHero = () => {
                 variant="p"
                 className="text-lg md:text-xl text-gray-500 leading-relaxed max-w-lg"
               >
-                The modern lost & found platform that actually works. Report
+                AI Powered lost & found platform that actually works. Report
                 once, and we&apos;ll search everywhere for you in real time.
               </Typography>
             </motion.div>
