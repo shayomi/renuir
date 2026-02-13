@@ -97,9 +97,9 @@ const HomeHero = () => {
                 variant="h1"
                 className="text-5xl md:text-6xl lg:text-7xl font-black text-gray-900 leading-[1.1] tracking-tight"
               >
-                Lost it?
+                AI-Powered
                 <br />
-                <span className="text-primary-600">Renuir it.</span>
+                <span className="text-primary-600">Lost & Found Platform</span>
               </Typography>
             </motion.div>
 
@@ -109,11 +109,12 @@ const HomeHero = () => {
               transition={{ delay: 0.4, duration: 0.5 }}
             >
               <Typography
-                variant="p"
-                className="text-lg md:text-xl text-gray-500 leading-relaxed max-w-lg"
+                variant="lead"
+                className="text-sm md:text-lg text-gray-500 leading-relaxed max-w-lg"
               >
-                AI Powered lost & found platform that actually works. Report
-                once, and we&apos;ll search everywhere for you in real time.
+                Never lose hope again. Report your lost item once, and let
+                Renuir’s AI-powered system search in real-time across multiple
+                sources to bring it back to you.
               </Typography>
             </motion.div>
 
