@@ -1,7 +1,10 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// This route talks to external services at request time only. Avoid running on
+// the Edge and keep it out of static analysis at build time.
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 export async function POST(req: Request) {
   try {
@@ -10,6 +13,18 @@ export async function POST(req: Request) {
     if (!email) {
       return NextResponse.json({ error: "Email is required" }, { status: 400 });
     }
+
+    // Instantiate lazily so `next build` (which collects route metadata without
+    // env vars) never throws on a missing RESEND_API_KEY.
+    const resendKey = process.env.RESEND_API_KEY;
+    if (!resendKey) {
+      console.error("RESEND_API_KEY is not set");
+      return NextResponse.json(
+        { error: "Server is not configured" },
+        { status: 500 }
+      );
+    }
+    const resend = new Resend(resendKey);
 
     const airtableRes = await fetch(
       `https://api.airtable.com/v0/${process.env.AIRTABLE_BASE_ID}/Waitlist`,
