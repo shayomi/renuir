@@ -62,7 +62,7 @@ const HomeHero = () => {
             </motion.p>
 
             <motion.div {...rise(0.24)} className="mt-8">
-              <WaitlistForm cta="Get early access" />
+              <WaitlistForm cta="Join the waitlist" />
             </motion.div>
 
             <motion.div
@@ -105,7 +105,7 @@ const HomeHero = () => {
               className="h-auto w-full drop-shadow-[0_18px_40px_rgba(11,18,32,0.08)]"
             />
 
-            {/* floating match notification — decorative accent, not a fake UI */}
+            {/* floating match notification, a decorative accent (not a fake UI) */}
             <motion.div
               {...(reduce
                 ? {}

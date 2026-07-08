@@ -68,7 +68,7 @@ const Nav = () => {
             href="/#waitlist"
             className="group inline-flex items-center gap-2 rounded-full bg-primary-600 py-2.5 pl-5 pr-5 text-[14px] font-semibold text-white shadow-float transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-primary-700 active:scale-[0.97]"
           >
-            Join waitlist
+            Join the waitlist
           </Link>
         </div>
 

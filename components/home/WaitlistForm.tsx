@@ -29,7 +29,7 @@ type WaitlistFormProps = {
 
 export function WaitlistForm({
   className,
-  cta = "Get early access",
+  cta = "Join the waitlist",
   align = "start",
 }: WaitlistFormProps) {
   const [loading, setLoading] = useState(false);

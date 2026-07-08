@@ -74,8 +74,8 @@ const MobileNav = () => {
 
             <div className="p-6 border-t border-gray-50 mt-auto">
               <Link href="/#waitlist" onClick={() => setSheetOpen(false)}>
-                <Button className="w-full h-12 rounded-xl font-bold bg-slate-900 hover:bg-slate-800 text-white text-base">
-                  Join waitlist
+                <Button className="w-full h-12 rounded-xl font-bold bg-primary-600 hover:bg-primary-700 text-white text-base">
+                  Join the waitlist
                 </Button>
               </Link>
             </div>

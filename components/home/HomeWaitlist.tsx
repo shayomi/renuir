@@ -27,7 +27,7 @@ export const EarlyAccessSection = () => {
             </p>
 
             <div className="mt-9 flex justify-center">
-              <WaitlistForm cta="Join the list" align="center" />
+              <WaitlistForm cta="Join the waitlist" align="center" />
             </div>
 
             <p className="mt-6 text-[14px] text-white/70">
