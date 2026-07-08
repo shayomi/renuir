@@ -68,7 +68,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6 tracking-tight">
+            <h4 className="font-display text-white font-semibold mb-6 tracking-tight">
               Navigation
             </h4>
             <ul className="space-y-4 text-sm font-semibold">
@@ -113,7 +113,7 @@ export const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6 tracking-tight">
+            <h4 className="font-display text-white font-semibold mb-6 tracking-tight">
               Support & Legal
             </h4>
             <ul className="space-y-4 text-sm font-semibold">

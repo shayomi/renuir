@@ -1,5 +1,6 @@
 import { Typography } from "@/components/ui/typography";
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Partner with Us | Renuir",
@@ -86,12 +87,12 @@ export default function PartnerPage() {
               Join our business waitlist and our team will reach out to discuss
               how Renuir can help your organization.
             </p>
-            <a
+            <Link
               href="/#waitlist"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white text-primary-600 font-bold hover:bg-gray-50 transition-all shadow-lg"
             >
               Contact Business Team
-            </a>
+            </Link>
           </div>
         </section>
 

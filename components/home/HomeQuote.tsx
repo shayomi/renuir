@@ -1,67 +1,46 @@
 "use client";
-import { Typography } from "../ui/typography";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { fadeIn } from "../Variants";
+
 import Image from "next/image";
+import { Reveal } from "@/components/ui/Reveal";
 
 const HomeQuote = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
-
   return (
-    <section className="bg-white py-20 md:py-28" id="about">
-      <div ref={ref} className="app-container">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Image */}
-          <motion.div
-            initial="hidden"
-            animate={isInView ? "show" : "hidden"}
-            variants={fadeIn("right", "tween", 0, 0.6)}
-            className="order-2 lg:order-1"
-          >
-            <div className="relative w-full aspect-4/3 rounded-2xl overflow-hidden">
+    <section id="about" className="app-container py-24 md:py-32">
+      <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+        <Reveal className="order-2 lg:order-1">
+          <div className="bezel">
+            <div className="bezel-core relative aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5]">
               <Image
                 src="/images/Building.png"
-                alt="Why we're building Renuir"
+                alt="Someone who has just lost their bag"
                 fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                priority
+                sizes="(max-width: 1024px) 100vw, 560px"
+                className="object-cover object-[center_20%]"
               />
             </div>
-          </motion.div>
+          </div>
+        </Reveal>
 
-          {/* Content */}
-          <motion.div
-            initial="hidden"
-            animate={isInView ? "show" : "hidden"}
-            variants={fadeIn("left", "tween", 0.2, 0.6)}
-            className="order-1 lg:order-2 space-y-6"
-          >
-            <Typography
-              variant="h2"
-              className="font-bold text-gray-900 text-3xl md:text-4xl lg:text-5xl leading-tight tracking-tight"
-            >
-              Why we&apos;re building this
-            </Typography>
+        <Reveal delay={0.1} className="order-1 max-w-xl lg:order-2">
+          <h2 className="font-display text-4xl font-semibold leading-[1.05] tracking-[-0.02em] text-ink md:text-5xl">
+            Why we&apos;re building this
+          </h2>
 
-            <div className="space-y-5">
-              <p className="text-gray-500 leading-relaxed text-base md:text-lg">
-                We&apos;ve all been there. That sinking feeling when you realize
-                your bag is gone. Then comes the worst part: calling every place
-                you visited, repeating the same description, hoping someone
-                picked it up.
-              </p>
-
-              <p className="font-semibold text-gray-900 leading-relaxed text-base md:text-lg">
-                We&apos;re building Renuir because that process is broken. One
-                report should be enough. We want to make it easy to get your
-                stuff back, and easy for good people to return what they find.
-              </p>
-            </div>
-          </motion.div>
-        </div>
+          <div className="mt-7 space-y-5 text-[17px] leading-relaxed text-ink/60">
+            <p>
+              We&apos;ve all felt it. That sinking moment when you realise your
+              bag is gone, then the worst part: calling every place you visited,
+              repeating the same description, hoping someone handed it in.
+            </p>
+            <p className="font-display text-[20px] font-medium leading-snug text-ink md:text-[22px]">
+              One report should be enough.
+            </p>
+            <p>
+              We&apos;re making it easy to get your things back, and just as easy
+              for good people to return what they find.
+            </p>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

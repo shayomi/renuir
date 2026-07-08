@@ -23,8 +23,8 @@ const MobileNav = () => {
     <section className="lg:hidden">
       <Sheet open={isSheetOpen} onOpenChange={setSheetOpen}>
         <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" className="text-gray-700">
-            <Menu className="h-6 w-6" />
+          <Button variant="ghost" size="icon" className="text-ink">
+            <Menu className="h-6 w-6" strokeWidth={2} />
           </Button>
         </SheetTrigger>
         <SheetContent

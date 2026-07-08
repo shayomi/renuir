@@ -1,112 +1,76 @@
 "use client";
-import Link from "next/link";
-import { Typography } from "@/components/ui/typography";
-import { Button } from "../ui/button";
-import { Loststat } from "../utils/data/homeItems";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { fadeIn } from "../Variants";
-import { ArrowRight } from "lucide-react";
+
 import Image from "next/image";
+import { Loststat } from "../utils/data/homeItems";
+import { Reveal } from "@/components/ui/Reveal";
 
 export const LostSomething = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
-
   return (
-    <section id="how-it-works" className="bg-gray-50 py-20 md:py-28">
-      <div ref={ref} className="app-container">
-        {/* Header */}
-        <motion.div
-          initial="hidden"
-          animate={isInView ? "show" : "hidden"}
-          variants={fadeIn("up", "tween", 0, 0.6)}
-          className="text-center max-w-3xl mx-auto mb-12 md:mb-16"
-        >
-          <Typography
-            variant="h2"
-            className="font-bold text-gray-900 text-3xl md:text-4xl lg:text-5xl tracking-tight mb-5"
-          >
-            How it works
-          </Typography>
-
-          <Typography
-            variant="h4"
-            className="text-gray-500 font-medium text-lg md:text-xl leading-relaxed"
-          >
-            Three simple steps to get your belongings back. No hassle, no
-            endless searching.
-          </Typography>
-        </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-16 max-w-5xl mx-auto">
-          <div className="  space-y-8">
-            {Loststat.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial="hidden"
-                animate={isInView ? "show" : "hidden"}
-                variants={fadeIn("left", "tween", 0.3 + index * 0.15, 0.6)}
-                className="flex items-start gap-6 group"
-              >
-                <div className="relative shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 rounded-xl bg-white border border-gray-200 shadow-sm text-primary-600 font-bold text-xl group-hover:scale-105 transition-transform duration-300">
-                    {stat.order}
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Typography
-                    variant="h4"
-                    className="font-bold text-gray-900 text-lg md:text-xl tracking-tight"
-                  >
-                    {stat.value}
-                  </Typography>
-                  <Typography
-                    variant="smallText"
-                    className="text-gray-500 leading-relaxed text-base font-medium"
-                  >
-                    {stat.label}
-                  </Typography>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-          <motion.div
-            initial="hidden"
-            animate={isInView ? "show" : "hidden"}
-            variants={fadeIn("right", "tween", 0.2, 0.6)}
-            className="order-2"
-          >
-            <div className="relative w-full aspect-24/18  rounded-2xl overflow-hidden">
+    <section
+      id="how-it-works"
+      className="relative border-y border-ink/[0.06] bg-white py-24 md:py-32"
+    >
+      <div className="app-container">
+        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
+          {/* Real product, in hand */}
+          <Reveal className="order-2 lg:order-1">
+            <div className="relative mx-auto max-w-md">
+              <div
+                aria-hidden
+                className="absolute inset-x-4 bottom-6 top-10 -z-10 rounded-[3rem] bg-gradient-to-b from-primary-600/[0.12] to-primary-600/[0.02] blur-2xl"
+              />
               <Image
-                src="/images/howitworks.jpeg"
-                alt="How Renuir works"
-                fill
-                className="object-cover rounded-2xl border"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                priority
+                src="/images/heroimg-1.png"
+                alt="Someone reporting a lost item in the Renuir app"
+                width={912}
+                height={1508}
+                sizes="(max-width: 1024px) 90vw, 440px"
+                className="h-auto w-full drop-shadow-[0_18px_40px_rgba(11,18,32,0.1)]"
               />
             </div>
-          </motion.div>
-        </div>
+          </Reveal>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-          className="flex justify-center"
-        >
-          <Link href="/#waitlist">
-            <Button
-              size="lg"
-              className="px-8 h-14 rounded-xl font-bold text-base bg-primary-600 hover:bg-primary-700 text-white shadow-lg shadow-primary-600/20 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
-            >
-              Get started now
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </Link>
-        </motion.div>
+          {/* Vertical stepper */}
+          <Reveal delay={0.1} className="order-1 max-w-lg lg:order-2">
+            <h2 className="font-display text-4xl font-semibold tracking-[-0.02em] text-ink md:text-5xl">
+              Three steps. That&apos;s it.
+            </h2>
+            <p className="mt-5 text-[18px] leading-relaxed text-ink/55">
+              No calling round every place you visited. No repeating the same
+              description ten times.
+            </p>
+
+            <ol className="mt-12">
+              {Loststat.map((step, index) => {
+                const isLast = index === Loststat.length - 1;
+                return (
+                  <li key={index} className="relative flex gap-5 pb-10 last:pb-0">
+                    {!isLast && (
+                      <span
+                        aria-hidden
+                        className="absolute bottom-1 left-[27px] top-14 w-px bg-gradient-to-b from-primary-300 to-primary-100"
+                      />
+                    )}
+                    <span className="relative z-10 flex h-[54px] w-[54px] shrink-0 items-center justify-center rounded-2xl bg-white text-primary-600 ring-1 ring-ink/[0.07]">
+                      <step.icon className="h-6 w-6" strokeWidth={1.75} />
+                      <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-primary-600 text-[11px] font-semibold text-white">
+                        {step.order}
+                      </span>
+                    </span>
+                    <div className="pt-1.5">
+                      <h3 className="font-display text-[21px] font-semibold tracking-[-0.01em] text-ink">
+                        {step.value}
+                      </h3>
+                      <p className="mt-1.5 text-[16px] leading-relaxed text-ink/55">
+                        {step.label}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
